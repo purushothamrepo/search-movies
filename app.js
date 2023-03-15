@@ -25,6 +25,7 @@ app.get("/result", (req, res)=>{
         }
     })
 })
+
 app.get("/result/:id", (req, res)=>{
     
     console.log(process.env.API_KEY)
@@ -32,13 +33,24 @@ app.get("/result/:id", (req, res)=>{
     request(url, function (error, response, body){
         if(!error && response.statusCode==200){
             const data= JSON.parse(body)
-          
-            res.render("AboutMovie", {movieData: data})
+            const imageUrl = data.Poster === 'N/A' ? '/public/images/placeholder.png' : data.Poster;
+            res.render("AboutMovie", {movieData: data, imageUrl: imageUrl})
         }else{
             res.send("Uh oh error")
         }
     })
 })
+app.get("/about", (req, res) => {
+    const aboutMeInfo = {
+      name: "purushotham",
+      bio: "Your Bio",
+      hobbies: ["Hobby 1", "Hobby 2", "Hobby 3"],
+      
+    };
+  
+    res.render("about", { aboutMeInfo });
+  });
+  
 app.get("*", (req, res)=>{
     res.send("Go back! Illegal response")
 })

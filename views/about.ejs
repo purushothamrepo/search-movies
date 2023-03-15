@@ -1,0 +1,15 @@
+<%- include("./partials/header") %>
+
+<div>
+  <h1>About Me</h1>
+  <p><%= aboutMeInfo.name %></p>
+  <p><%= aboutMeInfo.bio %></p>
+  <ul>
+    <% aboutMeInfo.hobbies.forEach(function(hobby) { %>
+    <li><%= hobby %></li>
+    <% }) %>
+  </ul>
+  <!-- Add more information as necessary -->
+</div>
+
+<%- include("./partials/footer") %>
